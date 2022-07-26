@@ -23,5 +23,8 @@ subprocess.run('mv openmoise-docker/* .', shell=True)
 subprocess.run('rm -fr openmoise-docker/', shell=True)
 subprocess.run('unzip filestore.zip', shell=True)
 
+print("-- Suppression des fichiers ... ")
+subprocess.run('rm -fr filestore.zip', shell=True)
+
 print("-- Lancement des conteneurs")
 subprocess.run('docker-compose up -d', shell=True)
