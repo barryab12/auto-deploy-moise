@@ -26,11 +26,11 @@ subprocess.run(url_docker_compose, shell=True)
 if (platform.system() == "Linux"):
     subprocess.run('mv openmoise-docker/* .', shell=True)
 elif (platform.system() == "Windows"):
-    subprocess.run('move openmoise-docker/* .', shell=True)
+    subprocess.run('move .\openmoise-docker\* .', shell=True)
 if (platform.system() == "Linux"):
     subprocess.run('rm -fr openmoise-docker/', shell=True)
 elif (platform.system() == "Windows"):
-    subprocess.run('del openmoise-docker/', shell=True)
+    subprocess.run('del openmoise-docker\ ', shell=True)
 if not os.path.isfile('filestore.zip'):
     with ZipFile('filestore.zip', 'r') as file:
         file.extractall()
