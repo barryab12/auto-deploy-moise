@@ -5,8 +5,9 @@ from botocore.exceptions import NoCredentialsError
 
 def download_from_s3(bucket, s3_file, local_file):
     s3 = boto3.resource('s3')
-    response = s3.head_object(Bucket=bucket, Key=s3_file)
-    size = response['ContentLength']
+    # s3 = boto3.client('s3')
+    # response = s3.head_object(Bucket=bucket, Key=s3_file)
+    size = 12321971913
     up_progress = progressbar.progressbar.ProgressBar(maxval=size)
     up_progress.start()
 
