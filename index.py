@@ -32,13 +32,15 @@ if (platform.system() == "Linux"):
 elif (platform.system() == "Windows"):
     subprocess.run('del openmoise-docker\ ', shell=True)
 if not os.path.isfile('filestore.zip'):
-    with ZipFile('filestore.zip', 'r') as file:
-        file.extractall()
+    # with ZipFile('filestore.zip', 'r') as file:
+    #     file.extractall()
+    if (platform.system() == "Linux"):
+        subprocess.run('unzip filestore.zip', shell=True)
 print("-- Suppression des fichiers ... ")
-if (platform.system() == "Linux"):
-    subprocess.run('rm -fr filestore.zip', shell=True)
-elif (platform.system() == "Windows"):
-    subprocess.run('del filestore.zip', shell=True)
+# if (platform.system() == "Linux"):
+#     subprocess.run('rm -fr filestore.zip', shell=True)
+# elif (platform.system() == "Windows"):
+#     subprocess.run('del filestore.zip', shell=True)
 print("-- Lancement des conteneurs")
 if os.path.isfile('docker-compose.yml') or os.path.isfile(
         'docker-compose.yaml'):

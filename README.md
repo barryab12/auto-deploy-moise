@@ -5,6 +5,7 @@
 - Avoir python 3 ou plus.
 - Avoir docker et docker-compose installés
 - Avoir pip
+- Avoir Git
 
 ### Etapes
 
