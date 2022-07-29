@@ -33,8 +33,13 @@ elif (platform.system() == "Windows"):
     subprocess.run('del openmoise-docker\ ', shell=True)
 print('Extraction des fichiers et documents en cours ...')
 if not os.path.isdir('filestore'):
-    with ZipFile('filestore.zip', 'r') as file:
-        file.extractall()
+    # with ZipFile('filestore.zip', 'r') as file:
+    #     file.extractall()
+    if (platform.system() == "Linux"):
+        subprocess.run('unzip filestore.zip', shell=True)
+    elif (platform.system() == "Windows"):
+        print('Dezipper manuellement le fichier filestore.zip')
+
 print("-- Suppression des fichiers ... ")
 if (platform.system() == "Linux"):
     subprocess.run('rm -fr filestore.zip', shell=True)
