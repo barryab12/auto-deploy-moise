@@ -15,7 +15,7 @@ url_docker_compose = "git clone https://github.com/barryab12/openmoise-docker.gi
 id = "1QcQeOyvFhqQ0dlLWX5_lySdgnyzum0BT"
 
 print("-- Téléchargement des images et fichiers documents ... ")
-if not os.path.isdir('filestore/'):
+if not os.path.isdir('filestore/') or not os.path.isfile('filestore.zip'):
     download_from_s3('filestoremoise', 'filestore.zip', 'filestore.zip')
 
 print("-- Téléchargement des modules")
