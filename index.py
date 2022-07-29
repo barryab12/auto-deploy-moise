@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-import platform
+import platform, wget
 import subprocess, os.path
 from getpass import getpass
-from s3 import download_from_s3
 from zipfile import ZipFile
 
 print('Vos informations GITLAB de connexion vous seront demandées.')
@@ -12,11 +11,11 @@ password = getpass(prompt='Pass: ')
 url_addons = "git clone https://{}:{}@gitlab.com/dev-odoo-14/addons.git".format(
     username, password)
 url_docker_compose = "git clone https://github.com/barryab12/openmoise-docker.git"
-id = "1QcQeOyvFhqQ0dlLWX5_lySdgnyzum0BT"
+filestore_url = 'https://filestoremoise.s3.amazonaws.com/filestore.zip'
 
 print("-- Téléchargement des images et fichiers documents ... ")
 if not os.path.isdir('filestore/') or not os.path.isfile('filestore.zip'):
-    download_from_s3('filestoremoise', 'filestore.zip', 'filestore.zip')
+    wget.download(filestore_url)
 
 print("-- Téléchargement des modules")
 if not os.path.isdir('addons/'):
