@@ -1,1 +1,2 @@
-gdown
+boto3
+progressbar

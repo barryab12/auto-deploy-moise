@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 import platform
-import subprocess, gdown, os.path
+import subprocess, os.path
 from getpass import getpass
+from s3 import download_from_s3
 from zipfile import ZipFile
 
 print('Vos informations GITLAB de connexion vous seront demandées.')
@@ -15,7 +16,7 @@ id = "1QcQeOyvFhqQ0dlLWX5_lySdgnyzum0BT"
 
 print("-- Téléchargement des images et fichiers documents ... ")
 if not os.path.isdir('filestore/'):
-    gdown.download(id=id, output='filestore.zip', quiet=False)
+    download_from_s3('filestoremoise', 'filestore.zip', 'filestore.zip')
 
 print("-- Téléchargement des modules")
 if not os.path.isdir('addons/'):
@@ -31,16 +32,15 @@ if (platform.system() == "Linux"):
     subprocess.run('rm -fr openmoise-docker/', shell=True)
 elif (platform.system() == "Windows"):
     subprocess.run('del openmoise-docker\ ', shell=True)
-if not os.path.isfile('filestore.zip'):
-    # with ZipFile('filestore.zip', 'r') as file:
-    #     file.extractall()
-    if (platform.system() == "Linux"):
-        subprocess.run('unzip filestore.zip', shell=True)
+print('Extraction des fichiers et documents en cours ...')
+if not os.path.isdir('filestore'):
+    with ZipFile('filestore.zip', 'r') as file:
+        file.extractall()
 print("-- Suppression des fichiers ... ")
-# if (platform.system() == "Linux"):
-#     subprocess.run('rm -fr filestore.zip', shell=True)
-# elif (platform.system() == "Windows"):
-#     subprocess.run('del filestore.zip', shell=True)
+if (platform.system() == "Linux"):
+    subprocess.run('rm -fr filestore.zip', shell=True)
+elif (platform.system() == "Windows"):
+    subprocess.run('del filestore.zip', shell=True)
 print("-- Lancement des conteneurs")
 if os.path.isfile('docker-compose.yml') or os.path.isfile(
         'docker-compose.yaml'):
