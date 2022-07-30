@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from genericpath import isdir
 import platform, wget
 import subprocess, os.path
 from getpass import getpass
@@ -41,10 +42,11 @@ if not os.path.isdir('filestore'):
         print('Dezipper manuellement le fichier filestore.zip')
 
 print("-- Suppression des fichiers ... ")
-if (platform.system() == "Linux"):
-    subprocess.run('rm -fr filestore.zip', shell=True)
-elif (platform.system() == "Windows"):
-    subprocess.run('del filestore.zip', shell=True)
+if os.path.isdir('filestore'):
+    if (platform.system() == "Linux"):
+        subprocess.run('rm -fr filestore.zip', shell=True)
+    elif (platform.system() == "Windows"):
+        subprocess.run('del filestore.zip', shell=True)
 print("-- Lancement des conteneurs")
 if os.path.isfile('docker-compose.yml') or os.path.isfile(
         'docker-compose.yaml'):
